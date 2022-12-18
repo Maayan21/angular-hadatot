@@ -1,40 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from 'src/app/classes/member';
 import { MembersService } from 'src/app/services/members.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
-  styleUrls: ['./members.component.scss']
+  styleUrls: ['./members.component.scss'],
 })
 export class MembersComponent implements OnInit {
   showSpinner = true;
-  members=[];
+  membersList: Array<Member> = [];
+  member: Member = new Member;
 
-  constructor( private memberService: MembersService) { }
+  constructor(private memberService: MembersService,private router:Router) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.memberService.getUsers().subscribe(
+      myData => {
+        //׳”׳₪׳¨׳׳˜׳¨ ׳”׳׳×׳§׳‘׳ ׳”׳•׳ ׳”׳ ׳×׳•׳ ׳™׳ ׳©׳—׳–׳¨׳• ׳׳”׳©׳¨׳×
+        this.membersList = myData;
+        this.showSpinner = false;
+      },
+      myErr => { alert(myErr.message); });
   }
 
-  getMembers() {
-    this.memberService.getUsers()
-    .subscribe((res: any) => {
-      const newRes = res.data.concat(res.data);
-      this.members = newRes;
-      this.showSpinner = false;
-    });
+   getMemberById(id: number) {
+    this.memberService.getUser(id).subscribe(
+      myData => {
+        this.member = myData;},
+      myErr => {
+        alert(myErr.message);
+      });
   }
-  
 }
-
-
-// export interface GithubApi {
-//   items: GithubIssue[];
-//   total_count: number;
-// }
-
-// export interface GithubIssue {
-//   created_at: string;
-//   number: string;
-//   state: string;
-//   title: string;
-// }

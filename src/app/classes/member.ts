@@ -1,10 +1,10 @@
-import { NumberValueAccessor } from "@angular/forms";
-
 export class Member {
-  id: string='';
-  birthDate: Date;
-  name: string='';
-  country: string='';
-  zip:number=0;
-  vipMember:boolean=false
+  constructor(
+    public id: string = '',
+    public name: string = '',
+    public birthDate: Date = new Date(),
+    public country: string = '',
+    public zip: number = 0,
+    vipMember: boolean = false
+  ) {}
 }

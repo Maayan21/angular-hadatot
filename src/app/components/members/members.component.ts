@@ -18,7 +18,6 @@ export class MembersComponent implements OnInit {
   ngOnInit() {
     this.memberService.getUsers().subscribe(
       myData => {
-        //׳”׳₪׳¨׳׳˜׳¨ ׳”׳׳×׳§׳‘׳ ׳”׳•׳ ׳”׳ ׳×׳•׳ ׳™׳ ׳©׳—׳–׳¨׳• ׳׳”׳©׳¨׳×
         this.membersList = myData;
         this.showSpinner = false;
       },
